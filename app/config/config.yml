@@ -1,0 +1,3 @@
+framework:
+    secret: '4KHU2RDFouSPmHO2hHgz'
+    templating: { engines: ['twig'] }

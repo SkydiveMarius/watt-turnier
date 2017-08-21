@@ -1,0 +1,10 @@
+services:
+    app.controller.frontend.player:
+        class:  FCT\Watten\Src\Controller\UI\PlayerController
+        calls:
+          - [setContainer, ["@service_container"]]
+
+    app.controller.api.player:
+        class:  FCT\Watten\Src\Controller\API\PlayerController
+        calls:
+        arguments: ["@service_container"]

@@ -1,0 +1,6 @@
+app/logs
+app/cache
+vendor
+node_modules
+.env
+.idea/*

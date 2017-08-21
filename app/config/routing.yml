@@ -1,0 +1,4 @@
+root:
+  path:     /players
+  defaults: { _controller: app.controller.frontend.player:show}
+  methods:  [GET]

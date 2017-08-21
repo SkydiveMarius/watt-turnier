@@ -1,0 +1,23 @@
+{% include 'header.twig' %}
+<body>
+<script>
+    $(document).ready(function() {
+        app.init();
+    });
+</script>
+<div class="ui vertical labeled icon inverted visible sidebar menu">
+    <a class="{{ navigationItem == 'players' ? 'active' : '' }} item">
+        <i class="users icon"></i>
+        Spieler
+    </a>
+    <a class="item">
+        <i class="sitemap icon"></i>
+        Ergebnisse
+    </a>
+    <a class="item">
+        <i class="trophy icon"></i>
+        Rangliste
+    </a>
+</div>
+{{  }}
+</body>

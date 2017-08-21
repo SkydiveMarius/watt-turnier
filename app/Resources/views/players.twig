@@ -1,1 +1,60 @@
 {% extends 'base.twig' %}
+{% block content %}
+    <h2 class="ui inverted header">
+        <i class="users icon"></i>
+        <div class="content">
+            Team Übersicht
+        </div>
+    </h2>
+    <table class="ui compact celled inverted striped table">
+        <thead>
+        <tr>
+            <th class="collapsing">Team Nr.</th>
+            <th>Spieler A</th>
+            <th>Spieler B</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="collapsing">101</td>
+            <td>Marius Meisssner</td>
+            <td>Peter Berger</td>
+        </tr>
+        <tr>
+            <td class="collapsing">102</td>
+            <td>Anton Huber</td>
+            <td>Sebastian Berger</td>
+        </tr>
+        </tbody>
+        <tfoot class="full-width">
+        <tr>
+            <th colspan="3">
+                <div class="ui right floated small primary labeled icon button" onclick="app.TeamOverviewController.showModal();">
+                    <i class="add icon"></i> Team hinzufügen
+                </div>
+            </th>
+        </tr>
+        </tfoot>
+    </table>
+{% endblock %}
+{% block modals %}
+    <div class="ui modal" id="playerAddModal">
+        <div class="header">Team hinzufügen</div>
+        <div class="content">
+            <form class="ui form">
+                <div class="field">
+                    <label>Erster Spieler</label>
+                    <input type="text" name="first-player" placeholder="Name des ersten Spielers">
+                </div>
+                <div class="field">
+                    <label>Zweiter Spieler</label>
+                    <input type="text" name="second player" placeholder="Name des zweiten Spielers">
+                </div>
+            </form>
+        </div>
+        <div class="actions">
+            <div class="ui cancel button">Cancel</div>
+            <div class="ui blue left labeled icon button"><i class="checkmark icon"></i>Hinzufügen</div>
+        </div>
+    </div>
+{% endblock %}

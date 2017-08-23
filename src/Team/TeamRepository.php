@@ -85,6 +85,6 @@ class TeamRepository extends Repository
 
         $nextId = $rows[0]['max_team_id'];
 
-        return is_int($nextId) ? $nextId : self::MIN_TEAM_ID;
+        return is_int($nextId) ? ($nextId + 1) : self::MIN_TEAM_ID;
     }
 }

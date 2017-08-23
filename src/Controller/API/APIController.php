@@ -4,8 +4,8 @@ namespace FCT\Watten\Src\Controller\API;
 use FCT\Watten\Src\General\Logging;
 use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class APIController

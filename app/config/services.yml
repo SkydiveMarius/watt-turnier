@@ -4,7 +4,7 @@ services:
         calls:
           - [setContainer, ["@service_container"]]
 
-    app.controller.api.player:
-        class:  FCT\Watten\Src\Controller\API\PlayerController
+    app.controller.api.teams:
+        class:  FCT\Watten\Src\Controller\API\TeamController
         calls:
         arguments: ["@service_container"]

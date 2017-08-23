@@ -32,10 +32,13 @@ try {
 $connection->getSchemaManager()->createTable(new Table('scores', [
     new Column('round_id', Type::getType(Type::INTEGER)),
     new Column('table_id', Type::getType(Type::INTEGER)),
-    new Column('set_id', Type::getType(Type::INTEGER)),
     new Column('team_a', Type::getType(Type::INTEGER)),
     new Column('team_b', Type::getType(Type::INTEGER)),
-    new Column('score_a', Type::getType(Type::INTEGER)),
-    new Column('score_b', Type::getType(Type::INTEGER))
+    new Column('score_a_1', Type::getType(Type::INTEGER)),
+    new Column('score_b_1', Type::getType(Type::INTEGER)),
+    new Column('score_a_2', Type::getType(Type::INTEGER)),
+    new Column('score_b_2', Type::getType(Type::INTEGER)),
+    new Column('score_a_3', Type::getType(Type::INTEGER)),
+    new Column('score_b_3', Type::getType(Type::INTEGER))
 ]));
 $connection->getSchemaManager()->createConstraint(new Index('scores_unique', ['round_id', 'table_id'], true, true), 'scores');

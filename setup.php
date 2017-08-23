@@ -25,3 +25,17 @@ $connection->getSchemaManager()->createTable(new Table('teams', [
 ]));
 $connection->getSchemaManager()->createConstraint(new Index('teams_team_id', ['team_id'], true, true), 'teams');
 
+// Table SCORES
+try {
+    $connection->getSchemaManager()->dropTable('scores');
+} catch (\Exception $e) {}
+$connection->getSchemaManager()->createTable(new Table('scores', [
+    new Column('round_id', Type::getType(Type::INTEGER)),
+    new Column('table_id', Type::getType(Type::INTEGER)),
+    new Column('set_id', Type::getType(Type::INTEGER)),
+    new Column('team_a', Type::getType(Type::INTEGER)),
+    new Column('team_b', Type::getType(Type::INTEGER)),
+    new Column('score_a', Type::getType(Type::INTEGER)),
+    new Column('score_b', Type::getType(Type::INTEGER))
+]));
+$connection->getSchemaManager()->createConstraint(new Index('scores_unique', ['round_id', 'table_id'], true, true), 'scores');

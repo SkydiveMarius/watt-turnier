@@ -1,6 +1,7 @@
 <?php
 namespace FCT\Watten\Src\Team;
 
+use Assert\Assertion;
 use Doctrine\DBAL\Connection;
 use FCT\Watten\Src\Persistence\Repository;
 
@@ -19,6 +20,11 @@ class TeamRepository extends Repository
     private $factory;
 
     /**
+     * @var Team[]
+     */
+    private $teams = [];
+
+    /**
      * TeamRepository constructor.
      *
      * @param null             $connection
@@ -28,6 +34,27 @@ class TeamRepository extends Repository
     {
         parent::__construct($connection);
         $this->factory = $factory ?: new TeamFactory();
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return Team
+     */
+    public function getById(int $id): Team
+    {
+        if (!isset($this->teams[$id])) {
+            $rows = $this->connection->createQueryBuilder()
+                ->select('*')->from('teams')
+                ->where('team_id = :team_id')
+                ->setParameter(':team_id', $id)
+                ->execute()->fetchAll();
+
+            Assertion::notEmpty($rows, 'Team not found by id=' . $id);
+            $this->teams[$id] = $this->factory->createFromDatabase($rows[0]);
+        }
+
+        return $this->teams[$id];
     }
 
     /**
@@ -50,6 +77,8 @@ class TeamRepository extends Repository
                 ':second_player' => $team->getSecondPlayer()
             ])
             ->execute();
+
+        $this->teams[$team->getId()] = $team;
     }
 
     /**
@@ -57,18 +86,19 @@ class TeamRepository extends Repository
      */
     public function getAll(): array
     {
+        $this->teams = [];
         $rows = $this->connection->createQueryBuilder()
             ->select('*')
             ->from('teams')
             ->orderBy('team_id')
             ->execute()->fetchAll();
 
-        $teams = [];
         foreach ($rows as $row) {
-            $teams[] = $this->factory->createFromDatabase($row);
+            $team = $this->factory->createFromDatabase($row);
+            $this->teams[$team->getId()] = $team;
         }
 
-        return $teams;
+        return array_values($this->teams);
     }
 
 

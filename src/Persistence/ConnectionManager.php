@@ -27,10 +27,11 @@ final class ConnectionManager
     {
         if (self::$connection === null) {
             self::$connection = DriverManager::getConnection([
-                'dbname'   => 'watten',
-                'user'     => 'watten',
-                'password' => 'turnier',
-                'driver'   => 'pdo_pgsql'
+                    'host'     => 'localhost',
+                    'dbname'   => 'watten',
+                    'user'     => 'watten',
+                    'password' => 'turnier',
+                    'driver'   => 'pdo_pgsql'
             ]);
         }
 

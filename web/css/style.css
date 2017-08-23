@@ -8,3 +8,22 @@ body {
 .content {
 
 }
+
+#tableScoreGrid .segment {
+    min-height: 194px;
+}
+
+#tableScoreGrid .result-add.button {
+    float: right;
+    display: block;
+    margin-top: -42px;
+    margin-right: -4px;
+}
+
+#scoreAddModal td.team-id input {
+    width: 93px;
+}
+
+#scoreAddModal td.points input {
+    width: 80px;
+}

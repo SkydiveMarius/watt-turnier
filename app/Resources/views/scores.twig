@@ -1,0 +1,179 @@
+{% extends 'base.twig' %}
+{% block content %}
+    <h2 class="ui inverted header">
+        <i class="sitemap icon"></i>
+        <div class="content">
+            Ergebnisse Runde {{ round_id }}
+        </div>
+    </h2>
+    <div class="five ui buttons">
+        <button class="ui inverted {{ round_id == 1 ? 'active' : '' }} button">Runde 1</button>
+        <button class="ui inverted {{ round_id == 2 ? 'active' : '' }} button">Runde 2</button>
+        <button class="ui inverted {{ round_id == 3 ? 'active' : '' }} button">Runde 3</button>
+        <button class="ui inverted {{ round_id == 4 ? 'active' : '' }} button">Runde 5</button>
+        <button class="ui inverted {{ round_id == 5 ? 'active' : '' }} button">Runde 6</button>
+    </div>
+    <br><br>
+    <div class="ui two column grid" id="tableScoreGrid">
+        <div class="column">
+            <div class="ui inverted segment">
+                <h3 class="ui inverted header">
+                    <i class="table icon"></i>
+                    <div class="content">
+                        Tisch #01
+                    </div>
+                </h3>
+                <table class="ui very basic inverted celled table">
+                    <thead>
+                        <tr>
+                            <th>Team</th>
+                            <th>Erster Spieler</th>
+                            <th>Zweiter Spieler</th>
+                            <th>Spiel 1</th>
+                            <th>Spiel 2</th>
+                            <th>Spiel 3</th>
+                            <th>Ergebnis</th>
+                            <th>Punkte</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>101</td>
+                        <td>
+                            <i class="user icon"></i>
+                            Marius Meissner
+                        </td>
+                        <td>
+                            <i class="user icon"></i>
+                            David Meissner
+                        </td>
+                        <td>12</td>
+                        <td>04</td>
+                        <td>12</td>
+                        <td><div class="ui circular green inverted horizontal label">2</div></td>
+                        <td><div class="ui horizontal label">13</div></td>
+                    </tr>
+                    <tr>
+                        <td>104</td>
+                        <td>
+                            <i class="user icon"></i>
+                            Kurt Steinberger
+                        </td>
+                        <td>
+                            <i class="user icon"></i>
+                            Ramona Steinberger
+                        </td>
+                        <td ><div class="ui horizontal red label">10</div></td>
+                        <td class="center aligned"><div class="ui horizontal green label">12</div></td>
+                        <td class="center aligned"><div class="ui horizontal red label">09</div></td>
+                        <td class="center aligned"><div class="ui circular red inverted large label">1</div></td>
+                        <td class="center aligned"><div class="ui horizontal label">-4</div></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="column">
+            <div class="ui inverted center aligned segment">
+                <h3 class="ui inverted header">
+                    <i class="table icon"></i>
+                    <div class="content">
+                        Tisch 01
+                    </div>
+                </h3>
+                <div class="ui left labeled blue icon result-add button" onclick="app.ScoreOverviewController.showModal(1, 2)"><i class="add icon"></i>Ergebnis eintragen</div>
+                <h2 class="ui icon inverted header">
+                    <div class="content">
+                        Spiel läuft
+                        <div class="sub header">Zu diesem Tisch liegen noch keine Ergebnisse vor</div>
+                    </div>
+                </h2>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block modals %}
+    <div class="ui modal" id="scoreAddModal">
+        <div class="header">Ergebnis eintragen - Tisch #01</div>
+        <div class="content">
+            <table class="ui very basic celled table">
+                <thead>
+                <tr>
+                    <th>Team</th>
+                    <th>Erster Spieler</th>
+                    <th>Zweiter Spieler</th>
+                    <th>Spiel 1</th>
+                    <th>Spiel 2</th>
+                    <th>Spiel 3</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="collapsing team-id">
+                        <div class="ui input">
+                            <input type="text" placeholder="Team A">
+                        </div>
+                    </td>
+                    <td>
+                        <i class="user icon"></i>
+                        ???
+                    </td>
+                    <td>
+                        <i class="user icon"></i>
+                        ???
+                    </td>
+                    <td class="collapsing points set-a-1">
+                        <div class="ui input">
+                            <input type="text" placeholder="Punkte">
+                        </div>
+                    </td>
+                    <td class="collapsing points set-a-2">
+                        <div class="ui input">
+                            <input type="text" placeholder="Punkte">
+                        </div>
+                    </td>
+                    <td class="collapsing points set-a-3">
+                        <div class="ui input">
+                            <input type="text" placeholder="Punkte">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="collapsing team-id">
+                        <div class="ui input">
+                            <input type="text" placeholder="Team B">
+                        </div>
+                    </td>
+                    <td>
+                        <i class="user icon"></i>
+                        ???
+                    </td>
+                    <td>
+                        <i class="user icon"></i>
+                        ???
+                    </td>
+                    <td class="collapsing points set-b-1">
+                        <div class="ui input">
+                            <input type="text" placeholder="Punkte">
+                        </div>
+                    </td>
+                    <td class="collapsing points set-b-2">
+                        <div class="ui input">
+                            <input type="text" placeholder="Punkte">
+                        </div>
+                    </td>
+                    <td class="collapsing points set-b-3">
+                        <div class="ui input">
+                            <input type="text" placeholder="Punkte">
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="actions">
+            <div class="ui cancel button">Abbrechen</div>
+            <div class="ui blue left labeled icon button create" onclick=""><i class="checkmark icon"></i>Eintragen</div>
+        </div>
+    </div>
+{% endblock %}

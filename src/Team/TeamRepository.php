@@ -1,6 +1,7 @@
 <?php
 namespace FCT\Watten\Src\Team;
 
+use Doctrine\DBAL\Connection;
 use FCT\Watten\Src\Persistence\Repository;
 
 /**
@@ -11,6 +12,23 @@ use FCT\Watten\Src\Persistence\Repository;
 class TeamRepository extends Repository
 {
     const MIN_TEAM_ID = 100;
+
+    /**
+     * @var TeamFactory
+     */
+    private $factory;
+
+    /**
+     * TeamRepository constructor.
+     *
+     * @param null             $connection
+     * @param TeamFactory|null $factory
+     */
+    public function __construct($connection = null, TeamFactory $factory = null)
+    {
+        parent::__construct($connection);
+        $this->factory = $factory ?: new TeamFactory();
+    }
 
     /**
      * @param Team $team
@@ -33,6 +51,26 @@ class TeamRepository extends Repository
             ])
             ->execute();
     }
+
+    /**
+     * @return Team[]
+     */
+    public function getAll(): array
+    {
+        $rows = $this->connection->createQueryBuilder()
+            ->select('*')
+            ->from('teams')
+            ->orderBy('team_id')
+            ->execute()->fetchAll();
+
+        $teams = [];
+        foreach ($rows as $row) {
+            $teams[] = $this->factory->createFromDatabase($row);
+        }
+
+        return $teams;
+    }
+
 
     /**
      * @return int

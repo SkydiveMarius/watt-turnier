@@ -10,5 +10,19 @@ use FCT\Watten\Src\Persistence\Repository;
  */
 class TeamRepository extends Repository
 {
+    /**
+     * @param Team $team
+     */
+    public function add(Team $team)
+    {
 
+    }
+
+    /**
+     * @return int
+     */
+    private function getNextId(): int
+    {
+        $rows = $this->connection->
+    }
 }

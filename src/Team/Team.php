@@ -26,11 +26,11 @@ class Team implements \JsonSerializable
     /**
      * Team constructor.
      *
-     * @param int    $id
      * @param string $firstPlayer
      * @param string $secondPlayer
+     * @param int    $id
      */
-    public function __construct(int $id, string $firstPlayer, string $secondPlayer)
+    public function __construct(string $firstPlayer, string $secondPlayer, int $id = null)
     {
         $this->id = $id;
         $this->firstPlayer = $firstPlayer;
@@ -40,9 +40,17 @@ class Team implements \JsonSerializable
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id)
+    {
+        $this->id = $id;
     }
 
     /**

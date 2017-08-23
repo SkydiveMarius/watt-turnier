@@ -30,7 +30,7 @@ final class ConnectionManager
                 'dbname'   => 'watten',
                 'user'     => 'watten',
                 'password' => 'turnier',
-                'driver'   => 'postgres'
+                'driver'   => 'pdo_pgsql'
             ]);
         }
 

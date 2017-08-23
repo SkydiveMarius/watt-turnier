@@ -15,16 +15,16 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td class="collapsing">101</td>
-            <td>Marius Meisssner</td>
-            <td>Peter Berger</td>
-        </tr>
-        <tr>
-            <td class="collapsing">102</td>
-            <td>Anton Huber</td>
-            <td>Sebastian Berger</td>
-        </tr>
+        {% for team in teams %}
+            Key : {{ key }}
+            Value : {{ value }}
+            <tr>
+                <td class="collapsing">{{ team.Id() }}</td>
+                <td>{{ team.firstPlayer() }}</td>
+                <td>{{ team.secondPlayer() }}</td>
+            </tr>
+        {% endfor %}
+
         </tbody>
         <tfoot class="full-width">
         <tr>

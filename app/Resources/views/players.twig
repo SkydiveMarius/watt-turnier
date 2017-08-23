@@ -44,17 +44,17 @@
             <form class="ui form">
                 <div class="field">
                     <label>Erster Spieler</label>
-                    <input type="text" name="first-player" placeholder="Name des ersten Spielers">
+                    <input type="text" name="first-player" id="firstPlayerInput" placeholder="Name des ersten Spielers">
                 </div>
                 <div class="field">
                     <label>Zweiter Spieler</label>
-                    <input type="text" name="second player" placeholder="Name des zweiten Spielers">
+                    <input type="text" name="second player" id="secondPlayerInput" placeholder="Name des zweiten Spielers">
                 </div>
             </form>
         </div>
         <div class="actions">
             <div class="ui cancel button">Cancel</div>
-            <div class="ui blue left labeled icon button"><i class="checkmark icon"></i>Hinzufügen</div>
+            <div class="ui blue left labeled icon button create" onclick="app.TeamOverviewController.createTeam();"><i class="checkmark icon"></i>Hinzufügen</div>
         </div>
     </div>
 {% endblock %}

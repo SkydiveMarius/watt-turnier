@@ -101,6 +101,19 @@ class TeamRepository extends Repository
         return array_values($this->teams);
     }
 
+    /**
+     * @return int
+     */
+    public function getNumberOfTeams(): int
+    {
+        $rows = $this->connection->createQueryBuilder()
+            ->select('count(team_id) as team_count')
+            ->from('teams')
+            ->execute()
+            ->fetchAll();
+
+        return (int) $rows[0]['team_count'];
+    }
 
     /**
      * @return int

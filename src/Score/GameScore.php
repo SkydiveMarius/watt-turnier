@@ -13,12 +13,12 @@ class GameScore
     /**
      * @var int
      */
-    private $round;
+    protected $round;
 
     /**
      * @var int
      */
-    private $table;
+    protected $table;
 
     /**
      * @var Team
@@ -34,6 +34,21 @@ class GameScore
      * @var Set[]
      */
     private $sets;
+
+    /**
+     * @var bool
+     */
+    protected $finished = true;
+
+    /**
+     * @var int
+     */
+    private $positiveSetCountA = null;
+
+    /**
+     * @var int
+     */
+    private $positiveSetCountB = null;
 
     /**
      * GameScore constructor.
@@ -56,9 +71,97 @@ class GameScore
     /**
      * @return int
      */
+    public function getPositiveSetCountOfTeamA(): int
+    {
+        if ($this->positiveSetCountA === null) {
+            $this->positiveSetCountA = 0;
+
+            foreach ($this->sets as $set) {
+                if ($set->isTeamAWinner()) {
+                    $this->positiveSetCountA++;
+                }
+            }
+        }
+
+        return $this->positiveSetCountA;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPositiveSetCountOfTeamB(): int
+    {
+        if ($this->positiveSetCountB === null) {
+            $this->positiveSetCountB = 0;
+
+            foreach ($this->sets as $set) {
+                if ($set->isTeamBWinner()) {
+                    $this->positiveSetCountB++;
+                }
+            }
+        }
+
+        return $this->positiveSetCountB;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTeamAWinner(): bool
+    {
+        return $this->getPositiveSetCountOfTeamA() > $this->getPositiveSetCountOfTeamB();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTeamBWinner(): bool
+    {
+        return $this->getPositiveSetCountOfTeamB() > $this->getPositiveSetCountOfTeamA();
+    }
+
+    /**
+     * @return int
+     */
+    public function getPointsDeltaOfTeamA(): int
+    {
+        $delta = 0;
+
+        foreach ($this->sets as $set) {
+            $delta += $set->getTeamAScoreDelta();
+        }
+
+        return $delta;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPointsDeltaOfTeamB(): int
+    {
+        $delta = 0;
+
+        foreach ($this->sets as $set) {
+            $delta += $set->getTeamBScoreDelta();
+        }
+
+        return $delta;
+    }
+
+    /**
+     * @return int
+     */
     public function getRound(): int
     {
         return $this->round;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTableFormatted(): string
+    {
+        return str_pad($this->table, 2, '0', STR_PAD_LEFT);
     }
 
     /**
@@ -91,5 +194,28 @@ class GameScore
     public function getSets(): array
     {
         return $this->sets;
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return Set
+     */
+    public function getSet(int $id): Set
+    {
+        $id--;
+        if (!isset($this->sets[$id])) {
+            throw new \InvalidArgumentException('Set with ID=' . $id . ' is not defined');
+        }
+
+        return $this->sets[$id];
+    }
+
+    /**
+     * @return bool
+     */
+    public function isFinished(): bool
+    {
+        return $this->finished;
     }
 }

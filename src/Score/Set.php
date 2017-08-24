@@ -60,4 +60,36 @@ class Set
     {
         return $this->scoreTeamB;
     }
+
+    /**
+     * @return bool
+     */
+    public function isTeamAWinner(): bool
+    {
+        return $this->scoreTeamA > $this->scoreTeamB;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTeamBWinner(): bool
+    {
+        return $this->scoreTeamB > $this->scoreTeamA;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTeamAScoreDelta(): int
+    {
+        return $this->scoreTeamA - $this->scoreTeamB;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTeamBScoreDelta(): int
+    {
+        return $this->scoreTeamB - $this->scoreTeamA;
+    }
 }

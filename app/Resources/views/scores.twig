@@ -15,81 +15,76 @@
     </div>
     <br><br>
     <div class="ui two column grid" id="tableScoreGrid">
-        <div class="column">
-            <div class="ui inverted segment">
-                <h3 class="ui inverted header">
-                    <i class="table icon"></i>
-                    <div class="content">
-                        Tisch #01
-                    </div>
-                </h3>
-                <table class="ui very basic inverted celled table">
-                    <thead>
-                        <tr>
-                            <th>Team</th>
-                            <th>Erster Spieler</th>
-                            <th>Zweiter Spieler</th>
-                            <th>Spiel 1</th>
-                            <th>Spiel 2</th>
-                            <th>Spiel 3</th>
-                            <th>Ergebnis</th>
-                            <th>Punkte</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>101</td>
-                        <td>
-                            <i class="user icon"></i>
-                            Marius Meissner
-                        </td>
-                        <td>
-                            <i class="user icon"></i>
-                            David Meissner
-                        </td>
-                        <td>12</td>
-                        <td>04</td>
-                        <td>12</td>
-                        <td><div class="ui circular green inverted horizontal label">2</div></td>
-                        <td><div class="ui horizontal label">13</div></td>
-                    </tr>
-                    <tr>
-                        <td>104</td>
-                        <td>
-                            <i class="user icon"></i>
-                            Kurt Steinberger
-                        </td>
-                        <td>
-                            <i class="user icon"></i>
-                            Ramona Steinberger
-                        </td>
-                        <td ><div class="ui horizontal red label">10</div></td>
-                        <td class="center aligned"><div class="ui horizontal green label">12</div></td>
-                        <td class="center aligned"><div class="ui horizontal red label">09</div></td>
-                        <td class="center aligned"><div class="ui circular red inverted large label">1</div></td>
-                        <td class="center aligned"><div class="ui horizontal label">-4</div></td>
-                    </tr>
-                    </tbody>
-                </table>
+        {% for score in scores %}
+            <div class="column">
+                <div class="ui inverted {{ score.isFinished() ? '' : 'center aligned' }} segment">
+                    <h3 class="ui inverted header">
+                        <i class="table icon"></i>
+                        <div class="content">
+                            Tisch #{{ score.getTableFormatted() }}
+                        </div>
+                    </h3>
+                    {% if score.isFinished() %}
+                        <table class="ui very basic inverted celled table">
+                            <thead>
+                            <tr>
+                                <th>Team</th>
+                                <th>Erster Spieler</th>
+                                <th>Zweiter Spieler</th>
+                                <th>Spiel 1</th>
+                                <th>Spiel 2</th>
+                                <th>Spiel 3</th>
+                                <th>Ergebnis</th>
+                                <th>Punkte</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{ score.teamA().id() }}<</td>
+                                    <td>
+                                        <i class="user icon"></i>
+                                        {{ score.teamA().firstPlayer() }}
+                                    </td>
+                                    <td>
+                                        <i class="user icon"></i>
+                                        {{ score.teamA().secondPlayer() }}
+                                    </td>
+                                    <td class="center aligned"><div class="ui horizontal {{ score.getSet(1).isTeamAWinner() ? 'green' : 'red' }} label">{{ score.getSet(1).getScoreTeamA() }}</div></td>
+                                    <td class="center aligned"><div class="ui horizontal {{ score.getSet(2).isTeamAWinner() ? 'green' : 'red' }} label">{{ score.getSet(2).getScoreTeamA() }}</div></td>
+                                    <td class="center aligned"><div class="ui horizontal {{ score.getSet(3).isTeamAWinner() ? 'green' : 'red' }} label">{{ score.getSet(3).getScoreTeamA() }}</div></td>
+                                    <td class="center aligned"><div class="ui circular {{ score.isTeamAWinner() ? 'green' : 'red' }} inverted large label">{{ score.getPositiveSetCountOfTeamA() }}</div></td>
+                                    <td class="center aligned"><div class="ui horizontal label">{{ score.getPointsDeltaOfTeamA() }}</div></td>
+                                </tr>
+                                <tr>
+                                    <td>{{ score.teamB().id() }}<</td>
+                                    <td>
+                                        <i class="user icon"></i>
+                                        {{ score.teamB().firstPlayer() }}
+                                    </td>
+                                    <td>
+                                        <i class="user icon"></i>
+                                        {{ score.teamB().secondPlayer() }}
+                                    </td>
+                                    <td class="center aligned"><div class="ui horizontal {{ score.getSet(1).isTeamBWinner() ? 'green' : 'red' }} label">{{ score.getSet(1).getScoreTeamB() }}</div></td>
+                                    <td class="center aligned"><div class="ui horizontal {{ score.getSet(2).isTeamBWinner() ? 'green' : 'red' }} label">{{ score.getSet(2).getScoreTeamB() }}</div></td>
+                                    <td class="center aligned"><div class="ui horizontal {{ score.getSet(3).isTeamBWinner() ? 'green' : 'red' }} label">{{ score.getSet(3).getScoreTeamB() }}</div></td>
+                                    <td class="center aligned"><div class="ui circular {{ score.isTeamBWinner() ? 'green' : 'red' }} inverted large label">{{ score.getPositiveSetCountOfTeamB() }}</div></td>
+                                    <td class="center aligned"><div class="ui horizontal label">{{ score.getPointsDeltaOfTeamB() }}</div></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <div class="ui left labeled blue icon result-add button" onclick="app.ScoreOverviewController.showModal(1, 2)"><i class="add icon"></i>Ergebnis eintragen</div>
+                        <h2 class="ui icon inverted centered header">
+                            <div class="content">
+                                Spiel läuft
+                                <div class="sub header">Zu diesem Tisch liegen noch keine Ergebnisse vor</div>
+                            </div>
+                        </h2>
+                    {% endif %}
+                </div>
             </div>
-        </div>
-        <div class="column">
-            <div class="ui inverted center aligned segment">
-                <h3 class="ui inverted header">
-                    <i class="table icon"></i>
-                    <div class="content">
-                        Tisch 01
-                    </div>
-                </h3>
-                <div class="ui left labeled blue icon result-add button" onclick="app.ScoreOverviewController.showModal(1, 2)"><i class="add icon"></i>Ergebnis eintragen</div>
-                <h2 class="ui icon inverted header">
-                    <div class="content">
-                        Spiel läuft
-                        <div class="sub header">Zu diesem Tisch liegen noch keine Ergebnisse vor</div>
-                    </div>
-                </h2>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 {% endblock %}
 {% block modals %}

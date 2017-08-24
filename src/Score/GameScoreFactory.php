@@ -77,8 +77,12 @@ class GameScoreFactory
     private function createSets(array $data): array
     {
         $sets = [];
-        foreach ($data as $i => $setData) {
-            $sets[] = new Set($i + 1, $setData['scoreTeamA'], $setData['scoreTeamB']);
+        foreach ($data['sets'] as $i => $setData) {
+            $sets[] = new Set(
+                $i + 1,
+                $setData['scoreTeamA'],
+                $setData['scoreTeamB']
+            );
         }
 
         return $sets;

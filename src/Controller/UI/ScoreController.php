@@ -83,6 +83,7 @@ class ScoreController extends UiController
             }
         }
 
+        ksort($indexed);
         return array_values($indexed);
     }
 }

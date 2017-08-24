@@ -40,7 +40,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>{{ score.teamA().id() }}<</td>
+                                    <td>{{ score.teamA().id() }}</td>
                                     <td>
                                         <i class="user icon"></i>
                                         {{ score.teamA().firstPlayer() }}
@@ -56,7 +56,7 @@
                                     <td class="center aligned"><div class="ui horizontal label">{{ score.getPointsDeltaOfTeamA() }}</div></td>
                                 </tr>
                                 <tr>
-                                    <td>{{ score.teamB().id() }}<</td>
+                                    <td>{{ score.teamB().id() }}</td>
                                     <td>
                                         <i class="user icon"></i>
                                         {{ score.teamB().firstPlayer() }}
@@ -74,7 +74,7 @@
                             </tbody>
                         </table>
                     {% else %}
-                        <div class="ui left labeled blue icon result-add button" onclick="app.ScoreOverviewController.showModal(1, 2)"><i class="add icon"></i>Ergebnis eintragen</div>
+                        <div class="ui left labeled blue icon result-add button" onclick="app.ScoreOverviewController.showModal({{ round_id }}, {{ score.getTable() }})"><i class="add icon"></i>Ergebnis eintragen</div>
                         <h2 class="ui icon inverted centered header">
                             <div class="content">
                                 Spiel läuft
@@ -104,7 +104,7 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td class="collapsing team-id">
+                    <td class="collapsing team-id team-a-id">
                         <div class="ui input">
                             <input type="text" placeholder="Team A" onblur="app.ScoreOverviewController.loadTeamNames(this, 'a')">
                         </div>
@@ -134,7 +134,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="collapsing team-id">
+                    <td class="collapsing team-id team-b-id">
                         <div class="ui input">
                             <input type="text" placeholder="Team B" onblur="app.ScoreOverviewController.loadTeamNames(this, 'b')">
                         </div>
@@ -167,7 +167,7 @@
         </div>
         <div class="actions">
             <div class="ui cancel button">Abbrechen</div>
-            <div class="ui blue left labeled icon button create" onclick=""><i class="checkmark icon"></i>Eintragen</div>
+            <div class="ui blue left labeled icon button create" onclick="app.ScoreOverviewController.submitScores()"><i class="checkmark icon"></i>Eintragen</div>
         </div>
     </div>
 {% endblock %}

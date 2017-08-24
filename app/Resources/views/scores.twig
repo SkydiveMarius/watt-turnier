@@ -106,14 +106,14 @@
                 <tr>
                     <td class="collapsing team-id">
                         <div class="ui input">
-                            <input type="text" placeholder="Team A">
+                            <input type="text" placeholder="Team A" onblur="app.ScoreOverviewController.loadTeamNames(this, 'a')">
                         </div>
                     </td>
-                    <td>
+                    <td class="team-a first-player">
                         <i class="user icon"></i>
                         ???
                     </td>
-                    <td>
+                    <td class="team-a second-player">
                         <i class="user icon"></i>
                         ???
                     </td>
@@ -136,14 +136,13 @@
                 <tr>
                     <td class="collapsing team-id">
                         <div class="ui input">
-                            <input type="text" placeholder="Team B">
+                            <input type="text" placeholder="Team B" onblur="app.ScoreOverviewController.loadTeamNames(this, 'b')">
                         </div>
                     </td>
-                    <td>
+                    <td class="team-b first-player">
                         <i class="user icon"></i>
                         ???
-                    </td>
-                    <td>
+                    <td class="team-b second-player">
                         <i class="user icon"></i>
                         ???
                     </td>

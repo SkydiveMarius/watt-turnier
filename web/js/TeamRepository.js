@@ -14,4 +14,19 @@ function TeamRepository()
             }
         })
     };
+
+    /**
+     * @param {int} id
+     * @param {function} callback
+     */
+    this.getById = function (id, callback)
+    {
+        $.ajax({
+            method: 'GET',
+            url: '/api/teams/' + id,
+            success: function (data) {
+                callback(new Team(data.id, data.firstPlayer, data.secondPlayer));
+            }
+        })
+    }
 }

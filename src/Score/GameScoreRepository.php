@@ -29,6 +29,39 @@ class GameScoreRepository extends Repository
     }
 
     /**
+     * @param GameScore $gameScore
+     */
+    public function add(GameScore $gameScore)
+    {
+        $this->connection->createQueryBuilder()
+            ->insert('scores')
+            ->values([
+                'round_id'  => ':round_id',
+                'table_id'  => ':table_id',
+                'team_a'    => ':team_a',
+                'team_b'    => ':team_b',
+                'score_a_1' => ':score_a_1',
+                'score_a_2' => ':score_a_2',
+                'score_a_3' => ':score_a_3',
+                'score_b_1' => ':score_b_1',
+                'score_b_2' => ':score_b_2',
+                'score_b_3' => ':score_b_3',
+            ])
+            ->setParameters([
+                ':round_id'  => $gameScore->getRound(),
+                ':table_id'  => $gameScore->getTable(),
+                ':team_a'    => $gameScore->getTeamA()->getId(),
+                ':team_b'    => $gameScore->getTeamB()->getId(),
+                ':score_a_1' => $gameScore->getSet(1)->getScoreTeamA(),
+                ':score_b_1' => $gameScore->getSet(1)->getScoreTeamB(),
+                ':score_a_2' => $gameScore->getSet(2)->getScoreTeamA(),
+                ':score_b_2' => $gameScore->getSet(2)->getScoreTeamB(),
+                ':score_a_3' => $gameScore->getSet(3)->getScoreTeamA(),
+                ':score_b_3' => $gameScore->getSet(3)->getScoreTeamB()
+            ])->execute();
+    }
+
+    /**
      * @param int $round
      *
      * @return array

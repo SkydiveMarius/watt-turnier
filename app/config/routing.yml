@@ -17,3 +17,8 @@ getTeamById:
   path:     /api/teams/{id}
   defaults: { _controller: app.controller.api.teams:find}
   methods:  [GET]
+
+scoreCreation:
+  path:     /api/scores
+  defaults: { _controller: app.controller.api.scores:create}
+  methods:  [POST]

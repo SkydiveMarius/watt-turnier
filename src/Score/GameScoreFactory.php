@@ -1,7 +1,9 @@
 <?php
 namespace FCT\Watten\Src\Score;
 
+use Assert\Assertion;
 use FCT\Watten\Src\Team\TeamRepository;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class GameScoreFactory
@@ -45,5 +47,67 @@ class GameScoreFactory
             $this->teamRepository->getById($row['team_b']),
             $sets
         );
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return GameScore
+     */
+    public function createFromRequest(Request $request): GameScore
+    {
+        $data = json_decode($request->getContent(), true);
+        Assertion::isArray($data);
+        $this->validate($data);
+
+        return new GameScore(
+            $data['round'],
+            $data['table'],
+            $this->teamRepository->getById($data['teamA']),
+            $this->teamRepository->getById($data['teamB']),
+            $this->createSets($data)
+        );
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return Set[]
+     */
+    private function createSets(array $data): array
+    {
+        $sets = [];
+        foreach ($data as $i => $setData) {
+            $sets[] = new Set($i + 1, $setData['scoreTeamA'], $setData['scoreTeamB']);
+        }
+
+        return $sets;
+    }
+
+    /**
+     * @param array $data
+     */
+    private function validate(array $data)
+    {
+        Assertion::keyExists($data, 'round');
+        Assertion::keyExists($data, 'table');
+        Assertion::keyExists($data, 'teamA');
+        Assertion::keyExists($data, 'teamB');
+        Assertion::keyExists($data, 'sets');
+
+        Assertion::integer($data['round']);
+        Assertion::integer($data['table']);
+        Assertion::integer($data['teamA']);
+        Assertion::integer($data['teamB']);
+        Assertion::isArray($data['sets']);
+        Assertion::count($data['sets'], 3);
+
+        foreach ($data['sets'] as $set) {
+            Assertion::isArray($set);
+            Assertion::keyExists($set, 'scoreTeamA');
+            Assertion::keyExists($set, 'scoreTeamB');
+            Assertion::integer($set['scoreTeamA']);
+            Assertion::integer($set['scoreTeamB']);
+        }
     }
 }

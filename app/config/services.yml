@@ -3,6 +3,7 @@ services:
         class:  FCT\Watten\Src\Controller\UI\PlayerController
         calls:
           - [setContainer, ["@service_container"]]
+
     app.controller.frontend.scores:
         class:  FCT\Watten\Src\Controller\UI\ScoreController
         calls:
@@ -10,5 +11,10 @@ services:
 
     app.controller.api.teams:
         class:  FCT\Watten\Src\Controller\API\TeamController
+        calls:
+        arguments: ["@service_container"]
+
+    app.controller.api.scores:
+        class:  FCT\Watten\Src\Controller\API\ScoreController
         calls:
         arguments: ["@service_container"]

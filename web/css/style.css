@@ -28,3 +28,13 @@ body {
 #scoreAddModal td.points input {
     width: 80px;
 }
+
+#rankGrid .table td {
+    padding-top: 11px !important;
+    padding-bottom: 11px !important;
+}
+
+#rankGrid {
+    height: 91%;
+    overflow: hidden;
+}

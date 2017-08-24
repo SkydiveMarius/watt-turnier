@@ -1,0 +1,102 @@
+{% extends 'base.twig' %}
+{% block content %}
+    <h2 class="ui inverted header">
+        <i class="trophy icon"></i>
+        <div class="content">
+            Rangliste
+        </div>
+    </h2>
+    <div class="five ui buttons">
+        {% for page in pages %}
+            <div class="ui inverted {{ page.active ? 'active' : '' }} button" onclick="document.location = '/rank/{{ page.id }}'">Platz {{ page.start }}-{{ page.end }}</div>
+        {% endfor %}
+    </div><br><br>
+    <div class="ui one column grid" id="rankGrid">
+        <div class="column">
+            <div class="ui inverted {{ score.isFinished() ? '' : 'center aligned' }} segment">
+                <table class="ui very basic inverted celled large striped table">
+                    <thead>
+                    <tr>
+                        <th class="collapsing">Rang</th>
+                        <th class="collapsing">Team</th>
+                        <th>Erster Spieler</th>
+                        <th>Zweiter Spieler</th>
+                        <th class="collapsing">Runde 1</th>
+                        <th class="collapsing">Runde 2</th>
+                        <th class="collapsing">Runde 3</th>
+                        <th class="collapsing">Gewonnene Spiele</th>
+                        <th class="collapsing">Punkte</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for rank in ranks %}
+                        <tr>
+                            <td class="collapsing">{{ rank.getRank() }}</td>
+                            <td class="collapsing">{{ rank.getTeam().id() }}</td>
+                            <td class="player-name">
+                                <h3>
+                                    <i class="user icon"></i>
+                                    {{ rank.getTeam().firstPlayer() }}
+                                </h3>
+                            </td>
+                            <td class="player-name">
+                                <h3>
+                                    <i class="user icon"></i>
+                                    {{ rank.getTeam().secondPlayer() }}
+                                </h3>
+                            </td>
+                            {% if rank.roundExists(1) %}
+                                <td class="collapsing center aligned">
+                                    <div class="ui horizontal {{ rank.getRoundColor(1) }} circular large label">
+                                        {{ rank.getRoundPositiveSetCount(1) }}
+                                    </div>
+                                    <div class="ui horizontal large label">
+                                        {{ rank.getRoundPointsDelta(1) }}
+                                    </div>
+                                </td>
+                            {% else %}
+                                <td class="collapsing center aligned">-</td>
+                            {% endif %}
+                            {% if rank.roundExists(2) %}
+                                <td class="collapsing center aligned">
+                                    <div class="ui horizontal {{ rank.getRoundColor(2) }} circular large label">
+                                        {{ rank.getRoundPositiveSetCount(2) }}
+                                    </div>
+                                    <div class="ui horizontal large label">
+                                        {{ rank.getRoundPointsDelta(2) }}
+                                    </div>
+                                </td>
+                            {% else %}
+                                <td class="collapsing center aligned">-</td>
+                            {% endif %}
+                            {% if rank.roundExists(3) %}
+                                <td class="collapsing center aligned">
+                                    <div class="ui horizontal {{ rank.getRoundColor(3) }} circular large label">
+                                        {{ rank.getRoundPositiveSetCount(3) }}
+                                    </div>
+                                    <div class="ui horizontal large label">
+                                        {{ rank.getRoundPointsDelta(3) }}
+                                    </div>
+                                </td>
+                            {% else %}
+                                <td class="collapsing center aligned">-</td>
+                            {% endif %}
+                            <td class="collapsing center aligned" style="width: 20px">
+                                <div class="ui blue circular big label">
+                                    {{ rank.getPositiveSetCount() }}
+                                </div>
+                            </td>
+                            <td class="collapsing">
+                                <div class="ui horizontal big label">
+                                    {{ rank.getPointDeltaSum() }}
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

@@ -8,6 +8,11 @@ scores:
   defaults: { _controller: app.controller.frontend.scores:show}
   methods:  [GET]
 
+rankes:
+  path:     /rank/{chunk}
+  defaults: { _controller: app.controller.frontend.rank:show}
+  methods:  [GET]
+
 teamCreation:
   path:     /api/teams
   defaults: { _controller: app.controller.api.teams:create}

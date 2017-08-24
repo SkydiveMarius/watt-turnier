@@ -3,6 +3,7 @@ namespace FCT\Watten\Src\Score;
 
 use Doctrine\DBAL\Connection;
 use FCT\Watten\Src\Persistence\Repository;
+use FCT\Watten\Src\Team\Team;
 
 /**
  * Class GameScoreRepository
@@ -90,6 +91,30 @@ class GameScoreRepository extends Repository
             ->where('round_id = :round_id')
             ->setParameter(':round_id', $round)
             ->orderBy('table_id')
+            ->execute()->fetchAll();
+
+        $scores = [];
+        foreach ($rows as $row) {
+            $scores[] = $this->factory->createFromDatabase($row);
+        }
+
+        return $scores;
+    }
+
+    /**
+     * @param Team $team
+     *
+     * @return array
+     */
+    public function getByTeam(Team $team): array
+    {
+        $rows = $this->connection->createQueryBuilder()
+            ->select('*')
+            ->from('scores')
+            ->where('team_a = :team_id')
+            ->orWhere('team_b = :team_id')
+            ->setParameter(':team_id', $team->getId())
+            ->orderBy('round_id')
             ->execute()->fetchAll();
 
         $scores = [];

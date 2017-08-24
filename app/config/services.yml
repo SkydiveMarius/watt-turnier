@@ -9,6 +9,11 @@ services:
         calls:
           - [setContainer, ["@service_container"]]
 
+    app.controller.frontend.rank:
+        class:  FCT\Watten\Src\Controller\UI\RankController
+        calls:
+          - [setContainer, ["@service_container"]]
+
     app.controller.api.teams:
         class:  FCT\Watten\Src\Controller\API\TeamController
         calls:

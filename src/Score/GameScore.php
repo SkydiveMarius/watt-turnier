@@ -105,6 +105,25 @@ class GameScore
     }
 
     /**
+     * @param Team $team
+     *
+     * @return int
+     */
+    public function getPositiveSetCount(Team $team): int
+    {
+        switch ($team->getId()) {
+            case $this->teamA->getId():
+                return $this->getPositiveSetCountOfTeamA();
+                break;
+            case $this->teamB->getId():
+                return $this->getPositiveSetCountOfTeamB();
+                break;
+            default:
+                throw new \LogicException('Team ' . $team->getId() . ' not found in GameScore');
+        }
+    }
+
+    /**
      * @return bool
      */
     public function isTeamAWinner(): bool
@@ -146,6 +165,25 @@ class GameScore
         }
 
         return $delta;
+    }
+
+    /**
+     * @param Team $team
+     *
+     * @return int
+     */
+    public function getPointsDelta(Team $team): int
+    {
+        switch ($team->getId()) {
+            case $this->teamA->getId():
+                return $this->getPointsDeltaOfTeamA();
+                break;
+            case $this->teamB->getId():
+                return $this->getPointsDeltaOfTeamB();
+                break;
+            default:
+                throw new \LogicException('Team ' . $team->getId() . ' not found in GameScore');
+        }
     }
 
     /**

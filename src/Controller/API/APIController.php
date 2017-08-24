@@ -5,6 +5,7 @@ use FCT\Watten\Src\General\Logging;
 use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -46,6 +47,17 @@ abstract class APIController extends Controller
             $this->log($e->getMessage(), ['file' => $e->getFile(), 'line' => $e->getLine()]);
             return new Response('', 500);
         }
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return int
+     */
+    protected function fetchEntityId(Request $request): int
+    {
+        $parts = explode('/', $request->getUri());
+        return (int) end($parts);
     }
 
     /**

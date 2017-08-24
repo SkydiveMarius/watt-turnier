@@ -12,3 +12,8 @@ teamCreation:
   path:     /api/teams
   defaults: { _controller: app.controller.api.teams:create}
   methods:  [POST]
+
+getTeamById:
+  path:     /api/teams/{id}
+  defaults: { _controller: app.controller.api.teams:find}
+  methods:  [GET]

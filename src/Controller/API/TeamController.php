@@ -44,6 +44,20 @@ class TeamController extends APIController
      *
      * @return Response
      */
+    public function find(Request $request): Response
+    {
+        return $this->sandbox(function () use ($request) {
+            $id = $this->fetchEntityId($request);
+            $team = $this->repository->getById($id);
+            return new JsonResponse($team);
+        });
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
     public function create(Request $request): Response
     {
         return $this->sandbox(function () use($request) {

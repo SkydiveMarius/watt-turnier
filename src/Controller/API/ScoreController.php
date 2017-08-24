@@ -54,4 +54,20 @@ class ScoreController extends APIController
             return new Response();
         });
     }
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function delete(Request $request): Response
+    {
+        return $this->sandbox(function () use ($request) {
+            $parts = explode('/', $request->getUri());
+            $tableId = end($parts);
+            $roundId = $parts[count($parts) - 3];
+
+            $this->repository->delete($roundId, $tableId);
+            return new Response();
+        });
+    }
 }

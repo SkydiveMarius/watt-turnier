@@ -14,5 +14,21 @@ function GameScoreRepository()
                 callback();
             }
         })
+    };
+
+    /**
+     * @param {int} roundId
+     * @param {int} tableId
+     * @param {function} callback
+     */
+    this.delete = function (roundId, tableId, callback)
+    {
+        $.ajax({
+            method: 'DELETE',
+            url: '/api/scores/round/' + roundId + '/table/' + tableId,
+            success: function () {
+                callback();
+            }
+        })
     }
 }

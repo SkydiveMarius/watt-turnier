@@ -22,3 +22,8 @@ scoreCreation:
   path:     /api/scores
   defaults: { _controller: app.controller.api.scores:create}
   methods:  [POST]
+
+deleteScore:
+  path:     /api/scores/round/{round_id}/table/{table_id}
+  defaults: { _controller: app.controller.api.scores:delete}
+  methods:  [DELETE]

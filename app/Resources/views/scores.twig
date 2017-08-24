@@ -25,6 +25,8 @@
                         </div>
                     </h3>
                     {% if score.isFinished() %}
+
+                        <div class="ui circular icon result-reset button" onclick="app.ScoreOverviewController.resetScores(this, {{ round_id }}, {{ score.getTable() }})"><i class="remove icon"></i></div>
                         <table class="ui very basic inverted celled table">
                             <thead>
                             <tr>

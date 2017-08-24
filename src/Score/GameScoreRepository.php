@@ -62,6 +62,22 @@ class GameScoreRepository extends Repository
     }
 
     /**
+     * @param $roundId
+     * @param $tableId
+     */
+    public function delete($roundId, $tableId)
+    {
+        $this->connection->createQueryBuilder()
+            ->delete('scores')
+            ->where('round_id = :round_id')
+            ->andWhere('table_id = :table_id')
+            ->setParameters([
+                ':round_id' => $roundId,
+                ':table_id' => $tableId
+            ])->execute();
+    }
+
+    /**
      * @param int $round
      *
      * @return array

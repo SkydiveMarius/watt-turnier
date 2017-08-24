@@ -85,5 +85,18 @@ function ScoreOverviewController()
         this.scoreRepository.submit(score, function () {
             location.reload();
         })
+    };
+
+    /**
+     * @param {*} button
+     * @param {number} roundId
+     * @param {number} tableId
+     */
+    this.resetScores = function (button, roundId, tableId)
+    {
+        $(button).addClass('loading');
+        this.scoreRepository.delete(roundId, tableId, function () {
+            location.reload();
+        })
     }
 }

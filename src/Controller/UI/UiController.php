@@ -1,7 +1,7 @@
 <?php
 namespace FCT\Watten\Src\Controller\UI;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use FCT\Watten\Src\Controller\Controller;
 
 /**
  * Class UiController

@@ -4,7 +4,7 @@ players:
   methods:  [GET]
 
 scores:
-  path:     /scores
+  path:     /scores/{round_id}
   defaults: { _controller: app.controller.frontend.scores:show}
   methods:  [GET]
 

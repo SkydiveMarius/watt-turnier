@@ -7,11 +7,11 @@
         </div>
     </h2>
     <div class="five ui buttons">
-        <button class="ui inverted {{ round_id == 1 ? 'active' : '' }} button">Runde 1</button>
-        <button class="ui inverted {{ round_id == 2 ? 'active' : '' }} button">Runde 2</button>
-        <button class="ui inverted {{ round_id == 3 ? 'active' : '' }} button">Runde 3</button>
-        <button class="ui inverted {{ round_id == 4 ? 'active' : '' }} button">Runde 5</button>
-        <button class="ui inverted {{ round_id == 5 ? 'active' : '' }} button">Runde 6</button>
+        <div class="ui inverted {{ round_id == 1 ? 'active' : '' }} button" onclick="document.location = '/scores/1'">Runde 1</div>
+        <div class="ui inverted {{ round_id == 2 ? 'active' : '' }} button" onclick="document.location = '/scores/2'">Runde 2</div>
+        <div class="ui inverted {{ round_id == 3 ? 'active' : '' }} button" onclick="document.location = '/scores/3'">Runde 3</div>
+        <div class="ui inverted {{ round_id == 4 ? 'active' : '' }} button" onclick="document.location = '/scores/4'">Runde 5</div>
+        <div class="ui inverted {{ round_id == 5 ? 'active' : '' }} button" onclick="document.location = '/scores/5'">Runde 6</div>
     </div>
     <br><br>
     <div class="ui two column grid" id="tableScoreGrid">

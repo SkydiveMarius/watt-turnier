@@ -45,8 +45,7 @@ class ScoreController extends UiController
      */
     public function show(Request $request): Response
     {
-        // ToDo: Fetch round ID from request
-        $roundId = 1;
+        $roundId = $this->fetchEntityId($request);
 
         $scores = $this->gameScoreRepository->getByRound($roundId);
         $scores = $this->fillTableGapes($roundId, $scores);

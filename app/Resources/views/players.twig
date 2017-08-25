@@ -1,6 +1,6 @@
 {% extends 'base.twig' %}
 {% block content %}
-    <h2 class="ui inverted header">
+    <h2 class="ui inverted  header">
         <i class="users icon"></i>
         <div class="content">
             Team Übersicht
@@ -13,6 +13,7 @@
                 <th class="collapsing">Team Nr.</th>
                 <th>Spieler A</th>
                 <th>Spieler B</th>
+                <th class="collapsing">Aktion</th>
             </tr>
             </thead>
             <tbody>
@@ -21,14 +22,15 @@
                     <td class="collapsing">{{ team.Id() }}</td>
                     <td><i class="user icon"></i>{{ team.firstPlayer() }}</td>
                     <td><i class="user icon"></i>{{ team.secondPlayer() }}</td>
+                    <td class="collapsing"><div class="ui button" onclick="app.TeamOverviewController.showModalWithPlayer({{ team.Id() }})"><i class="edit icon"></i>Bearbeiten</div></td>
                 </tr>
             {% endfor %}
 
             </tbody>
             <tfoot class="full-width">
             <tr>
-                <th colspan="3">
-                    <div class="ui right floated small primary labeled icon button" onclick="app.TeamOverviewController.showModal();">
+                <th colspan="4">
+                    <div class="ui left floated small primary labeled icon button" onclick="app.TeamOverviewController.showModal();">
                         <i class="add icon"></i> Team hinzufügen
                     </div>
                 </th>
@@ -54,7 +56,7 @@
         </div>
         <div class="actions">
             <div class="ui cancel button">Cancel</div>
-            <div class="ui blue left labeled icon button create" onclick="app.TeamOverviewController.createTeam();"><i class="checkmark icon"></i>Hinzufügen</div>
+            <div class="ui blue left labeled icon button create" onclick="app.TeamOverviewController.createTeam();"><i class="checkmark icon"></i>Speichern</div>
         </div>
     </div>
 {% endblock %}

@@ -18,6 +18,11 @@ teamCreation:
   defaults: { _controller: app.controller.api.teams:create}
   methods:  [POST]
 
+teamUpdate:
+  path:     /api/teams/{id}
+  defaults: { _controller: app.controller.api.teams:update}
+  methods:  [PUT]
+
 getTeamById:
   path:     /api/teams/{id}
   defaults: { _controller: app.controller.api.teams:find}

@@ -102,6 +102,24 @@ class TeamRepository extends Repository
     }
 
     /**
+     * @param Team $team
+     */
+    public function update(Team $team)
+    {
+        $this->connection->createQueryBuilder()
+            ->update('teams')
+            ->set('first_player', ':first_player')
+            ->set('second_player', ':second_player')
+            ->where('team_id = :team_id')
+            ->setParameters([
+                ':team_id'       => $team->getId(),
+                ':first_player'  => $team->getFirstPlayer(),
+                ':second_player' => $team->getSecondPlayer()
+            ])
+            ->execute();
+    }
+
+    /**
      * @return int
      */
     public function getNumberOfTeams(): int

@@ -6,7 +6,7 @@ body {
 }
 
 .content {
-
+    padding-right: 40px;
 }
 
 #tableScoreGrid .segment {
@@ -37,4 +37,7 @@ body {
 #rankGrid {
     height: 91%;
     overflow: hidden;
+}
+
+#rankGrid {
 }

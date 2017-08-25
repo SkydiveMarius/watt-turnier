@@ -66,4 +66,19 @@ class TeamController extends APIController
             return new JsonResponse($team, 200);
         });
     }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function update(Request $request): Response
+    {
+        return $this->sandbox(function () use($request) {
+            $team = $this->factory->createFromRequest($request);
+            $team->setId($this->fetchEntityId($request));
+            $this->repository->update($team);
+            return new JsonResponse($team, 200);
+        });
+    }
 }

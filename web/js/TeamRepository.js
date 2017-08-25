@@ -16,6 +16,22 @@ function TeamRepository()
     };
 
     /**
+     * @param {Team} team
+     * @param {function} callback
+     */
+    this.update = function (team, callback)
+    {
+        $.ajax({
+            method: 'PUT',
+            url: '/api/teams/' + team.id,
+            data: JSON.stringify(team),
+            success: function () {
+                callback();
+            }
+        })
+    };
+
+    /**
      * @param {int} id
      * @param {function} callback
      */
